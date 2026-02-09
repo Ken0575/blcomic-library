@@ -1,13 +1,13 @@
 package com.ken.blcomiclibrary.controller;
 
+import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +37,12 @@ public class BookController {
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(booksList);
         }
+    }
+
+    @PostMapping("/book/create")
+    public ResponseEntity<Book> createBook(@RequestBody @Valid BookRequest bookRequest) { // @Valid要記得加入，讓@NotNull生效
+        String isbn_jp = bookService.createBook(bookRequest);
+        Book book = bookService.getBookByIsbn_jp(isbn_jp);
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 }

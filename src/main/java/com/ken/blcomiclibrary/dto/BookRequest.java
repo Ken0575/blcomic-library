@@ -1,24 +1,28 @@
-package com.ken.blcomiclibrary.model;
+package com.ken.blcomiclibrary.dto;
 
-public class Book {
-    private Integer id;
+import jakarta.validation.constraints.NotNull;
+
+public class BookRequest {
+
+    @NotNull
     private String author;
+
+    @NotNull
     private String title_jp;
+
+    @NotNull
     private String publisher_jp;
+
+    @NotNull
     private String published_date_jp;
+
+    @NotNull
     private String isbn_jp;
+
     private String title_tw;
     private String publisher_tw;
     private String published_date_tw;
     private String isbn_tw;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getAuthor() {
         return author;
