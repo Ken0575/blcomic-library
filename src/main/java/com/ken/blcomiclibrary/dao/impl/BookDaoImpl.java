@@ -32,4 +32,17 @@ public class BookDaoImpl implements BookDao {
             return booklist.getFirst();
         }
     }
+
+    @Override
+    public List<Book> getBookByPublisher_jp(String publisher_jp) {
+        String sql = "SELECT * FROM BLComics WHERE publisher_jp = :publisher_jp";
+        Map<String,Object> map = new HashMap<>();
+        map.put("publisher_jp", publisher_jp);
+        List<Book> booklist = namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
+        if(booklist.isEmpty()){
+            return null;
+        } else  {
+            return booklist;
+        }
+    }
 }
