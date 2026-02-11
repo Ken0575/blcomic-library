@@ -99,4 +99,13 @@ public class BookDaoImpl implements BookDao {
         namedParameterJdbcTemplate.update(sql, map);
     }
 
+    @Override
+    public void deleteBook(String isbn_jp) {
+        String sql = "DELETE FROM BLComicsDB.BLComics WHERE isbn_jp = :isbn_jp";
+        Map<String, Object> map = new HashMap<>();
+        map.put("isbn_jp", isbn_jp);
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
 }

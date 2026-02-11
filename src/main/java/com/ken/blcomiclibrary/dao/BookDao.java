@@ -2,7 +2,6 @@ package com.ken.blcomiclibrary.dao;
 
 import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -11,4 +10,5 @@ public interface BookDao {
     List<Book> getBookByPublisher_jp(String publisher_jp);
     String createBook(BookRequest bookRequest);
     void updateBook(String isbn_jp, BookRequest bookRequest);
+    void deleteBook(String isbn_jp);
 }

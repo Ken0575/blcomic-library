@@ -47,18 +47,39 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 
-    // Set up PUT Request (Update)
+    // Setup PUT Request (Update)
     @PutMapping("book/update/{isbn_jp}")
     public ResponseEntity<Book> updateBook(@PathVariable String isbn_jp, @RequestBody @Valid BookRequest bookRequest) {
         // Check if Database has the book.
         Book book = bookService.getBookByIsbn_jp(isbn_jp);
         if(book == null){
+            // return HTTP 404 NOT FOUND
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         // Update Book info
         bookService.updateBook(isbn_jp, bookRequest);
         Book updatedbook = bookService.getBookByIsbn_jp(isbn_jp);
+
+        // return HTTP 200 OK
         return ResponseEntity.status(HttpStatus.OK).body(updatedbook);
+    }
+
+    //Setup DELETE Request
+    @DeleteMapping("/book/delete/{isbn_jp}")
+    public ResponseEntity<Book> deleteBook(@PathVariable String isbn_jp) {
+        // Check if Database has the book.
+        Book book = bookService.getBookByIsbn_jp(isbn_jp);
+        if(book == null){
+            // return HTTP 404 NOT FOUND
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        // Delete Book info
+        bookService.deleteBook(isbn_jp);
+        Book deletedbook = bookService.getBookByIsbn_jp(isbn_jp);
+
+        // return HTTP 204 NO CONTENT
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(deletedbook);
     }
 }

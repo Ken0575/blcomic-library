@@ -34,4 +34,9 @@ public class BookServiceImpl implements BookService {
     public void updateBook(String isbn_jp, BookRequest bookRequest) {
         bookDao.updateBook(isbn_jp, bookRequest);
     }
+
+    @Override
+    public void deleteBook(String isbn_jp) {
+        bookDao.deleteBook(isbn_jp);
+    }
 }
