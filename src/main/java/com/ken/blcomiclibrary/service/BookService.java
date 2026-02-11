@@ -9,4 +9,5 @@ public interface BookService {
     Book getBookByIsbn_jp(String isbn_jp);
     List<Book> getBookByPublisher_jp(String publisher_jp);
     String createBook(BookRequest bookRequest);
+    void updateBook(String isbn_jp, BookRequest bookRequest);
 }

@@ -5,11 +5,11 @@ import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class BookServiceImpl implements BookService {
 
     @Autowired
@@ -28,5 +28,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public String createBook(BookRequest bookRequest) {
         return bookDao.createBook(bookRequest);
+    }
+
+    @Override
+    public void updateBook(String isbn_jp, BookRequest bookRequest) {
+        bookDao.updateBook(isbn_jp, bookRequest);
     }
 }

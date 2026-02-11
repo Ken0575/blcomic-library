@@ -9,13 +9,13 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component
+@Repository
 public class BookDaoImpl implements BookDao {
 
     @Autowired
@@ -23,7 +23,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Book getBookByIsbn_jp(String isbn_jp) {
-        String sql = "SELECT * FROM BLComics WHERE isbn_jp = :isbn_jp";
+        String sql = "SELECT * FROM BLComicsDB.BLComics WHERE isbn_jp = :isbn_jp";
 
         Map<String, Object> map = new HashMap<>();
         map.put("isbn_jp", isbn_jp);
@@ -39,7 +39,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> getBookByPublisher_jp(String publisher_jp) {
-        String sql = "SELECT * FROM BLComics WHERE publisher_jp = :publisher_jp";
+        String sql = "SELECT * FROM BLComicsDB.BLComics WHERE publisher_jp = :publisher_jp";
         Map<String, Object> map = new HashMap<>();
         map.put("publisher_jp", publisher_jp);
         List<Book> booklist = namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
@@ -52,7 +52,8 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public String createBook(BookRequest bookRequest) {
-        String sql = "INSERT INTO BLComics (author, title_jp, publisher_jp, published_date_jp, isbn_jp, title_tw, publisher_tw, published_date_tw, isbn_tw) VALUES (:author, :title_jp, :publisher_jp, :published_date_jp, :isbn_jp, :title_tw, :publisher_tw, :published_date_tw, :isbn_tw)";
+        String sql = "INSERT INTO BLComicsDB.BLComics (author, title_jp, publisher_jp, published_date_jp, isbn_jp, title_tw, publisher_tw, published_date_tw, isbn_tw) " +
+                "VALUES (:author, :title_jp, :publisher_jp, :published_date_jp, :isbn_jp, :title_tw, :publisher_tw, :published_date_tw, :isbn_tw)";
         Map<String, Object> map = new HashMap<>();
         map.put("author", bookRequest.getAuthor());
         map.put("title_jp", bookRequest.getTitle_jp());
@@ -70,4 +71,32 @@ public class BookDaoImpl implements BookDao {
 
         return bookRequest.getIsbn_jp();
     }
+
+    @Override
+    public void updateBook(String isbn_jp, BookRequest bookRequest) {
+        String sql = "UPDATE BLComicsDB.BLComics SET " +
+                "author = :author, " +
+                "title_jp = :title_jp," +
+                "publisher_jp = :publisher_jp, " +
+                "published_date_jp = :published_date_jp, " +
+                "isbn_jp = :isbn_jp, " +
+                "title_tw = :title_tw, " +
+                "publisher_tw = :publisher_tw, " +
+                "published_date_tw =  :published_date_tw, " +
+                "isbn_tw = :isbn_tw " +
+                "WHERE isbn_jp = :isbn_jp";
+        Map<String, Object> map = new HashMap<>();
+        map.put("author", bookRequest.getAuthor());
+        map.put("title_jp", bookRequest.getTitle_jp());
+        map.put("publisher_jp", bookRequest.getPublisher_jp());
+        map.put("published_date_jp", bookRequest.getPublished_date_jp());
+        map.put("isbn_jp", bookRequest.getIsbn_jp());
+        map.put("title_tw", bookRequest.getTitle_tw());
+        map.put("publisher_tw", bookRequest.getPublisher_tw());
+        map.put("published_date_tw", bookRequest.getPublished_date_tw());
+        map.put("isbn_tw", bookRequest.getIsbn_tw());
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
+
 }
