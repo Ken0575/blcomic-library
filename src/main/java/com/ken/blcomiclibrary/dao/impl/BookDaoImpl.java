@@ -29,13 +29,14 @@ public class BookDaoImpl implements BookDao {
         Map<String, Object> map = new HashMap<>();
 
         if (bookQueryParams.getPublisher_jp() != null) {
-            sql += " AND Publisher_jp = :Publisher_jp";
-            map.put("Publisher_jp", bookQueryParams.getPublisher_jp());
+            sql += " AND publisher_jp = :publisher_jp";
+            map.put("publisher_jp", bookQueryParams.getPublisher_jp());
         }
         if (bookQueryParams.getSearch() != null) {
             sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
             map.put("search", "%" + bookQueryParams.getSearch() + "%");
         }
+        sql += " ORDER BY " + bookQueryParams.getOrder() + " " + bookQueryParams.getSort();
 
         return namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
     }

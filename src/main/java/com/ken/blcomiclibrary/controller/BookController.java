@@ -20,12 +20,19 @@ public class BookController {
 
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getBooks(
+            // Filtering
             @RequestParam(required = false) String Publisher_jp,
-            @RequestParam(required = false) String search
+            @RequestParam(required = false) String search,
+
+            // Sorting
+            @RequestParam(defaultValue = "published_date_jp") String order,
+            @RequestParam(defaultValue = "DESC") String sort
     ){
         BookQueryParams bookQueryParams = new BookQueryParams();
         bookQueryParams.setPublisher_jp(Publisher_jp);
         bookQueryParams.setSearch(search);
+        bookQueryParams.setOrder(order);
+        bookQueryParams.setSort(sort);
 
         List<Book> booklist = bookService.getBooks(bookQueryParams);
 
