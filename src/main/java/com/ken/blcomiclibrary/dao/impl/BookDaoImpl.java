@@ -26,18 +26,10 @@ public class BookDaoImpl implements BookDao {
     @Override
     public Integer countBooks(BookQueryParams bookQueryParams) {
         String sql = "SELECT count(*) FROM BLComicsDB.BLComics WHERE 1=1";
-
         Map<String, Object> map = new HashMap<>();
 
         // Filtering
-        if (bookQueryParams.getPublisher_jp() != null) {
-            sql += " AND publisher_jp = :publisher_jp";
-            map.put("publisher_jp", bookQueryParams.getPublisher_jp());
-        }
-        if (bookQueryParams.getSearch() != null) {
-            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
-            map.put("search", "%" + bookQueryParams.getSearch() + "%");
-        }
+        sql = setFilterSql(sql, map, bookQueryParams);
 
         return namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
     }
@@ -48,18 +40,10 @@ public class BookDaoImpl implements BookDao {
 
         // Get All Books
         String sql = "SELECT * FROM BLComicsDB.BLComics WHERE 1=1";
-
         Map<String, Object> map = new HashMap<>();
 
         // Filtering
-        if (bookQueryParams.getPublisher_jp() != null) {
-            sql += " AND publisher_jp = :publisher_jp";
-            map.put("publisher_jp", bookQueryParams.getPublisher_jp());
-        }
-        if (bookQueryParams.getSearch() != null) {
-            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
-            map.put("search", "%" + bookQueryParams.getSearch() + "%");
-        }
+        sql = setFilterSql(sql, map, bookQueryParams);
 
         // Sorting
         sql += " ORDER BY " + bookQueryParams.getOrder() + " " + bookQueryParams.getSort();
@@ -157,6 +141,20 @@ public class BookDaoImpl implements BookDao {
         map.put("isbn_jp", isbn_jp);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    private String setFilterSql(String sql, Map<String, Object> map, BookQueryParams bookQueryParams) {
+        // Filtering
+        if (bookQueryParams.getPublisher_jp() != null) {
+           sql += " AND publisher_jp = :publisher_jp";
+            map.put("publisher_jp", bookQueryParams.getPublisher_jp());
+        }
+        if (bookQueryParams.getSearch() != null) {
+            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
+            map.put("search", "%" + bookQueryParams.getSearch() + "%");
+        }
+
+        return sql;
     }
 
 }
