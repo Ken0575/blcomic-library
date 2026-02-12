@@ -22,9 +22,19 @@ public class BookDaoImpl implements BookDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Book> getBooks() {
-        String sql = "SELECT * FROM BLComicsDB.BLComics";
+    public List<Book> getBooks(String Publisher_jp, String search) {
+        String sql = "SELECT * FROM BLComicsDB.BLComics WHERE 1=1";
+
         Map<String, Object> map = new HashMap<>();
+
+        if (Publisher_jp != null) {
+            sql += " AND Publisher_jp = :Publisher_jp";
+            map.put("Publisher_jp", Publisher_jp);
+        }
+        if (search != null) {
+            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
+            map.put("search", "%" + search + "%");
+        }
 
         return namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
     }

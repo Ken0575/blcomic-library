@@ -18,8 +18,11 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks(){
-        List<Book> booklist = bookService.getBooks();
+    public ResponseEntity<List<Book>> getBooks(
+            @RequestParam(required = false) String Publisher_jp,
+            @RequestParam(required = false) String search
+    ){
+        List<Book> booklist = bookService.getBooks(Publisher_jp, search);
 
         // return HTTP 200 OK
         return ResponseEntity.status(HttpStatus.OK).body(booklist);
