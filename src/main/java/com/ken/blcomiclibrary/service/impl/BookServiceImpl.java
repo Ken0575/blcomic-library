@@ -17,6 +17,11 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
     @Override
+    public Integer countBooks(BookQueryParams bookQueryParams) {
+        return bookDao.countBooks(bookQueryParams);
+    }
+
+    @Override
     public List<Book> getBooks(BookQueryParams bookQueryParams) {
         return bookDao.getBooks(bookQueryParams);
     }

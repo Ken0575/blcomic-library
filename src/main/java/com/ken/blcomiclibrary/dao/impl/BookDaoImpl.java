@@ -22,12 +22,14 @@ public class BookDaoImpl implements BookDao {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    // Count Books
     @Override
-    public List<Book> getBooks(BookQueryParams bookQueryParams) {
-        String sql = "SELECT * FROM BLComicsDB.BLComics WHERE 1=1";
+    public Integer countBooks(BookQueryParams bookQueryParams) {
+        String sql = "SELECT count(*) FROM BLComicsDB.BLComics WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
+        // Filtering
         if (bookQueryParams.getPublisher_jp() != null) {
             sql += " AND publisher_jp = :publisher_jp";
             map.put("publisher_jp", bookQueryParams.getPublisher_jp());
@@ -36,7 +38,36 @@ public class BookDaoImpl implements BookDao {
             sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
             map.put("search", "%" + bookQueryParams.getSearch() + "%");
         }
+
+        return namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+    }
+
+    // Query Books
+    @Override
+    public List<Book> getBooks(BookQueryParams bookQueryParams) {
+
+        // Get All Books
+        String sql = "SELECT * FROM BLComicsDB.BLComics WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        // Filtering
+        if (bookQueryParams.getPublisher_jp() != null) {
+            sql += " AND publisher_jp = :publisher_jp";
+            map.put("publisher_jp", bookQueryParams.getPublisher_jp());
+        }
+        if (bookQueryParams.getSearch() != null) {
+            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
+            map.put("search", "%" + bookQueryParams.getSearch() + "%");
+        }
+
+        // Sorting
         sql += " ORDER BY " + bookQueryParams.getOrder() + " " + bookQueryParams.getSort();
+
+        // Pagination
+        sql += " LIMIT :limit OFFSET :offset";
+        map.put("limit", bookQueryParams.getLimit());
+        map.put("offset", bookQueryParams.getOffset());
 
         return namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
     }

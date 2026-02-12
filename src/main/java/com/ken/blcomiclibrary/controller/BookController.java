@@ -4,14 +4,19 @@ import com.ken.blcomiclibrary.dao.BookQueryParams;
 import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.service.BookService;
+import com.ken.blcomiclibrary.util.Page;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 public class BookController {
 
@@ -19,25 +24,39 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks(
+    public ResponseEntity<Page<Book>> getBooks(
             // Filtering
-            @RequestParam(required = false) String Publisher_jp,
+            @RequestParam(required = false) String publisher_jp,
             @RequestParam(required = false) String search,
 
             // Sorting
             @RequestParam(defaultValue = "published_date_jp") String order,
-            @RequestParam(defaultValue = "DESC") String sort
+            @RequestParam(defaultValue = "DESC") String sort,
+
+            // Pagination
+            @RequestParam(defaultValue = "5") @Max(500) @Min(0) Integer limit,
+            @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ){
         BookQueryParams bookQueryParams = new BookQueryParams();
-        bookQueryParams.setPublisher_jp(Publisher_jp);
+        bookQueryParams.setPublisher_jp(publisher_jp);
         bookQueryParams.setSearch(search);
         bookQueryParams.setOrder(order);
         bookQueryParams.setSort(sort);
+        bookQueryParams.setLimit(limit);
+        bookQueryParams.setOffset(offset);
 
         List<Book> booklist = bookService.getBooks(bookQueryParams);
 
+        Integer total = bookService.countBooks(bookQueryParams);
+
+        Page<Book> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResult(booklist);
+
         // return HTTP 200 OK
-        return ResponseEntity.status(HttpStatus.OK).body(booklist);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
 

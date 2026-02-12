@@ -18,4 +18,6 @@ public interface BookDao {
     void updateBook(String isbn_jp, BookRequest bookRequest);
 
     void deleteBook(String isbn_jp);
+
+    Integer countBooks(BookQueryParams bookQueryParams);
 }

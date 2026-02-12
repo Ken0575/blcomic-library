@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface BookService {
 
+    Integer countBooks(BookQueryParams bookQueryParams);
+
     List<Book> getBooks(BookQueryParams bookQueryParams);
 
     Book getBookByIsbn_jp(String isbn_jp);
