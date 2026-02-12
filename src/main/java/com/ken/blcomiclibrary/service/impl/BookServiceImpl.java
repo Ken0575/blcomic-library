@@ -1,6 +1,7 @@
 package com.ken.blcomiclibrary.service.impl;
 
 import com.ken.blcomiclibrary.dao.BookDao;
+import com.ken.blcomiclibrary.dao.BookQueryParams;
 import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.service.BookService;
@@ -16,8 +17,8 @@ public class BookServiceImpl implements BookService {
     private BookDao bookDao;
 
     @Override
-    public List<Book> getBooks(String Publisher_jp, String search) {
-        return bookDao.getBooks(Publisher_jp, search);
+    public List<Book> getBooks(BookQueryParams bookQueryParams) {
+        return bookDao.getBooks(bookQueryParams);
     }
 
     @Override

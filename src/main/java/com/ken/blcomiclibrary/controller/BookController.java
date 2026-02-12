@@ -1,5 +1,6 @@
 package com.ken.blcomiclibrary.controller;
 
+import com.ken.blcomiclibrary.dao.BookQueryParams;
 import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.service.BookService;
@@ -22,7 +23,11 @@ public class BookController {
             @RequestParam(required = false) String Publisher_jp,
             @RequestParam(required = false) String search
     ){
-        List<Book> booklist = bookService.getBooks(Publisher_jp, search);
+        BookQueryParams bookQueryParams = new BookQueryParams();
+        bookQueryParams.setPublisher_jp(Publisher_jp);
+        bookQueryParams.setSearch(search);
+
+        List<Book> booklist = bookService.getBooks(bookQueryParams);
 
         // return HTTP 200 OK
         return ResponseEntity.status(HttpStatus.OK).body(booklist);

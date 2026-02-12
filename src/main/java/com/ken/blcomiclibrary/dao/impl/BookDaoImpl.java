@@ -1,6 +1,7 @@
 package com.ken.blcomiclibrary.dao.impl;
 
 import com.ken.blcomiclibrary.dao.BookDao;
+import com.ken.blcomiclibrary.dao.BookQueryParams;
 import com.ken.blcomiclibrary.dto.BookRequest;
 import com.ken.blcomiclibrary.model.Book;
 import com.ken.blcomiclibrary.rowmapper.BookRowMapper;
@@ -22,18 +23,18 @@ public class BookDaoImpl implements BookDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Book> getBooks(String Publisher_jp, String search) {
+    public List<Book> getBooks(BookQueryParams bookQueryParams) {
         String sql = "SELECT * FROM BLComicsDB.BLComics WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
-        if (Publisher_jp != null) {
+        if (bookQueryParams.getPublisher_jp() != null) {
             sql += " AND Publisher_jp = :Publisher_jp";
-            map.put("Publisher_jp", Publisher_jp);
+            map.put("Publisher_jp", bookQueryParams.getPublisher_jp());
         }
-        if (search != null) {
+        if (bookQueryParams.getSearch() != null) {
             sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
-            map.put("search", "%" + search + "%");
+            map.put("search", "%" + bookQueryParams.getSearch() + "%");
         }
 
         return namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
