@@ -6,6 +6,8 @@ import com.ken.blcomiclibrary.model.Book;
 import java.util.List;
 
 public interface BookService {
+
+    List<Book> getBooks();
     Book getBookByIsbn_jp(String isbn_jp);
     List<Book> getBookByPublisher_jp(String publisher_jp);
     String createBook(BookRequest bookRequest);

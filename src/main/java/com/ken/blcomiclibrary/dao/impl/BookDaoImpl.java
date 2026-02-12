@@ -22,6 +22,14 @@ public class BookDaoImpl implements BookDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public List<Book> getBooks() {
+        String sql = "SELECT * FROM BLComicsDB.BLComics";
+        Map<String, Object> map = new HashMap<>();
+
+        return namedParameterJdbcTemplate.query(sql, map, new BookRowMapper());
+    }
+
+    @Override
     public Book getBookByIsbn_jp(String isbn_jp) {
         String sql = "SELECT * FROM BLComicsDB.BLComics WHERE isbn_jp = :isbn_jp";
 
