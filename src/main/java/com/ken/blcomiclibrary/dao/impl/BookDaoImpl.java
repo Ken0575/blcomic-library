@@ -146,8 +146,12 @@ public class BookDaoImpl implements BookDao {
     private String setFilterSql(String sql, Map<String, Object> map, BookQueryParams bookQueryParams) {
         // Filtering
         if (bookQueryParams.getPublisher_jp() != null) {
-           sql += " AND publisher_jp = :publisher_jp";
+            sql += " AND publisher_jp = :publisher_jp";
             map.put("publisher_jp", bookQueryParams.getPublisher_jp());
+        }
+        if (bookQueryParams.getPublisher_tw() != null) {
+            sql += " AND publisher_tw = :publisher_tw";
+            map.put("publisher_tw", bookQueryParams.getPublisher_tw());
         }
         if (bookQueryParams.getSearch() != null) {
             sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";

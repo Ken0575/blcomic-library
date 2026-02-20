@@ -2,6 +2,7 @@ package com.ken.blcomiclibrary.dao;
 
 public class BookQueryParams {
     private String publisher_jp;
+    private String publisher_tw;
     private String search;
     private String order;
     private String sort;
@@ -15,6 +16,14 @@ public class BookQueryParams {
 
     public void setPublisher_jp(String publisher_jp) {
         this.publisher_jp = publisher_jp;
+    }
+
+    public String getPublisher_tw() {
+        return publisher_tw;
+    }
+
+    public void setPublisher_tw(String publisher_tw) {
+        this.publisher_tw = publisher_tw;
     }
 
     public String getSearch() {
