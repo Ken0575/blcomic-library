@@ -32,7 +32,7 @@ public class BookController {
             @RequestParam(required = false) String search,
 
             // Sorting
-            @RequestParam(defaultValue = "published_date_jp") String order,
+            @RequestParam(defaultValue = "published_date_tw") String order,
             @RequestParam(defaultValue = "DESC") String sort,
 
             // Pagination
@@ -41,7 +41,6 @@ public class BookController {
     ){
         BookQueryParams bookQueryParams = new BookQueryParams();
         bookQueryParams.setPublisher_jp(publisher_jp);
-        bookQueryParams.setPublisher_tw(publisher_tw);
         bookQueryParams.setSearch(search);
         bookQueryParams.setOrder(order);
         bookQueryParams.setSort(sort);
@@ -77,7 +76,6 @@ public class BookController {
             @RequestParam(defaultValue = "0") @Min(0) Integer offset
     ){
         BookQueryParams bookQueryParams = new BookQueryParams();
-        bookQueryParams.setPublisher_jp(publisher_jp);
         bookQueryParams.setPublisher_tw(publisher_tw);
         bookQueryParams.setSearch(search);
         bookQueryParams.setOrder(order);

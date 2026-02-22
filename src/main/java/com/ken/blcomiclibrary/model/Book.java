@@ -11,6 +11,7 @@ public class Book {
     private String publisher_tw;
     private String published_date_tw;
     private String isbn_tw;
+    private String cover_url;
 
     public Integer getId() {
         return id;
@@ -90,5 +91,13 @@ public class Book {
 
     public void setIsbn_tw(String isbn_tw) {
         this.isbn_tw = isbn_tw;
+    }
+
+    public String getCover_url() {
+        return cover_url;
+    }
+
+    public void setCover_url(String cover_url) {
+        this.cover_url = cover_url;
     }
 }
