@@ -1,0 +1,279 @@
+:root {
+    font-size: 16px;
+    /* Font*/
+    --primary-font-color: #393939;
+    --secondary-font-color: #848484;
+    --highlight-font-color: #F0F0F0;
+    --primary-tw-font-family: "Noto Sans TC", sans-serif;
+    --primary-jp-font-family: "Noto Sans JP", sans-serif;
+    --primary-monospace-font-family: "JetBrains Mono", "Noto Sans TC", monospace;
+    --primary-font-weight: 300;
+    --bold-font-weight: 600;
+
+    /* Background */
+    --primary-background-color: #393939;
+
+    /* Color */
+    --highlight-color: #FDFD13;
+    --gray: #BFBFBF;
+}
+
+body {
+    background : linear-gradient(90deg, #DAD9D7 0%, #E9E8E6 50%, #DAD9D7 100%);
+
+    color: var(--primary-font-color);
+    font-family: var(--primary-tw-font-family);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: var(--bold-font-weight);
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    padding: 0;
+    margin: 32px auto 24px auto;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    flex: none;
+}
+
+.horizontal-line {
+    display: flex;
+    align-items: center;
+    width:100%
+}
+
+.horizontal-line-side {
+    height: 1px;
+    width: 140px;
+    background-color: #000000;
+    opacity: 75%;
+    flex: none;
+}
+
+.horizontal-line-center{
+    height: 1px;
+    background-color: #000000;
+    opacity: 25%;
+
+    flex-grow: 1;
+}
+
+.page-wrap{
+    margin: auto;
+    max-width: 1440px;
+
+    display: flex;
+}
+
+.menu {
+    width: 224px;
+
+    display: flex;
+    flex-direction: column;
+    flex:none
+}
+
+.categories {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+
+    border-bottom: #BFBFBF solid 1px;
+}
+
+.vertical-line {
+    margin: auto 8px;
+    padding: 0;
+    width: 1px;
+
+    flex: none;
+
+    background-color: #000000;
+    opacity: 25%;
+}
+
+.item-default {
+    margin: 0 0 8px 0;
+    padding: 0;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    flex: none;
+
+    background-color: var(--gray);
+
+    border-radius: 4px;
+}
+
+.pointer {
+    margin: 0 8px;
+    padding: 0;
+    height: 40px;
+    width: 4px;
+
+    flex: none;
+}
+
+.item-default:hover{
+    background-color: var(--primary-background-color);
+
+    &:hover * {
+        color: var(--highlight-font-color);
+    }
+
+    &:hover .pointer {
+        background-color: var(--highlight-color);
+    }
+}
+
+.item-icon {
+    margin: 0 4px;
+    padding: 0;
+    height: 32px;
+    width: 32px;
+
+    flex: none;
+
+    background-color: #ffffff40;
+}
+
+.item-name {
+    margin: 0 4px;
+
+    flex: none;
+    font-size: 1rem;
+}
+
+.item-english-name{
+    margin: 0 0 0 4px;
+
+    color: var(--secondary-font-color);
+    font-size: 0.5rem;
+}
+
+.item-selected{
+    margin: 0 0 8px 0;
+    padding: 0;
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    flex: none;
+
+    background-color: var(--primary-background-color);
+
+    border-radius: 4px;
+
+    & *{
+        color: var(--highlight-font-color);
+    }
+
+    & .pointer{
+        background-color: var(--highlight-color);
+    }
+}
+
+.contents {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.book-card {
+    padding: 0;
+    height: 184px;
+    width: 49%;
+
+    display: flex;
+
+    border-radius: 8px;
+    background-color: var(--primary-background-color);
+
+    color: var(--highlight-font-color);
+}
+
+/* margin: 0 16px 16px 0; */
+
+
+.book-image {
+    margin: 16px;
+    padding: 0;
+    height: 152px;
+    width: 106.8px;
+
+    flex: none;
+
+    background-color: #ffffff40;
+}
+
+.book-info {
+    margin: 16px;
+    margin-left: 0;
+    padding: 0;
+
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    font-size: 0.75rem;
+}
+
+.title-tw {
+    font-size: 1rem;
+}
+
+.publishing-info {
+    margin-top: 8px;
+    padding: 0;
+
+    display: flex;
+}
+
+.publishing-info-jp {
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    font-family: var(--primary-jp-font-family);
+}
+
+.publishing-info-tw {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.published-date {
+    font-family: var(--primary-monospace-font-family);
+    letter-spacing: 0.5px;
+}
+
+.isbn {
+    font-family: var(--primary-monospace-font-family);
+    letter-spacing: 0.5px;
+}
