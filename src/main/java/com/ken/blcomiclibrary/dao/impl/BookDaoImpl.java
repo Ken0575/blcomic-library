@@ -154,7 +154,7 @@ public class BookDaoImpl implements BookDao {
             map.put("publisher_tw", bookQueryParams.getPublisher_tw());
         }
         if (bookQueryParams.getSearch() != null) {
-            sql += " AND (title_jp LIKE :search) OR (title_tw LIKE :search)";
+            sql += " AND ((title_jp LIKE :search) OR (title_tw LIKE :search))";
             map.put("search", "%" + bookQueryParams.getSearch() + "%");
         }
 
