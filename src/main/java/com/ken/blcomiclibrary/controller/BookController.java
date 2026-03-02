@@ -41,41 +41,6 @@ public class BookController {
     ){
         BookQueryParams bookQueryParams = new BookQueryParams();
         bookQueryParams.setPublisher_jp(publisher_jp);
-        bookQueryParams.setSearch(search);
-        bookQueryParams.setOrder(order);
-        bookQueryParams.setSort(sort);
-        bookQueryParams.setLimit(limit);
-        bookQueryParams.setOffset(offset);
-
-        List<Book> booklist = bookService.getBooks(bookQueryParams);
-
-        Integer total = bookService.countBooks(bookQueryParams);
-
-        Page<Book> page = new Page<>();
-        page.setLimit(limit);
-        page.setOffset(offset);
-        page.setTotal(total);
-        page.setResult(booklist);
-
-        // return HTTP 200 OK
-        return ResponseEntity.status(HttpStatus.OK).body(page);
-    }
-    @GetMapping("/books/tw")
-    public ResponseEntity<Page<Book>> getTaiwanBooks(
-            // Filtering
-            @RequestParam(required = false) String publisher_jp,
-            @RequestParam(required = false) String publisher_tw,
-            @RequestParam(required = false) String search,
-
-            // Sorting
-            @RequestParam(defaultValue = "published_date_tw") String order,
-            @RequestParam(defaultValue = "DESC") String sort,
-
-            // Pagination
-            @RequestParam(defaultValue = "12") @Max(500) @Min(0) Integer limit,
-            @RequestParam(defaultValue = "0") @Min(0) Integer offset
-    ){
-        BookQueryParams bookQueryParams = new BookQueryParams();
         bookQueryParams.setPublisher_tw(publisher_tw);
         bookQueryParams.setSearch(search);
         bookQueryParams.setOrder(order);
@@ -96,7 +61,6 @@ public class BookController {
         // return HTTP 200 OK
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
-
 
     // 設定HTTP的GET Request
     @GetMapping("/books/isbn_jp/{isbn_jp}")
