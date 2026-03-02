@@ -1,0 +1,390 @@
+:root {
+    font-size: 16px;
+
+    /* Font*/
+    --primary-tw-font-family: "PingFang TC, Noto Sans TC", sans-serif;
+    --primary-jp-font-family: "Hiragino Sans, Noto Sans JP", sans-serif;
+    --primary-num-font-family: "Inter", sans-serif;
+    --primary-monospace-font-family: "JetBrains Mono", "Noto Sans TC", monospace;
+    --primary-font-weight: 300;
+    --bold-font-weight: 500;
+
+    /* Color */
+    --primary-background-color: rgb(248, 248, 248);
+    --menu-background-color: rgb(253, 253, 253);
+    --secondary-background-color: rgb(241,241,241);
+    --primary-font-color: #111113;
+    --secondary-font-color: #616161;
+    --primary-line-color: #e9e9e9;
+    --highlight-color: #00F09C;
+
+    /* Line */
+    --primary-line: 1px var(--primary-line-color) solid;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    color: var(--primary-font-colo);
+    font-family: var(--primary-tw-font-family);
+    font-weight: var(--primary-font-weight);
+}
+
+.font-jp {
+    font-family: var(--primary-jp-font-family);
+}
+
+body {
+    height: 100%;
+    background-color: #efefef;
+}
+
+.page {
+    margin: 16px;
+    padding: 16px;
+
+    display: flex;
+    min-height: 94vh;
+    gap: 16px;
+
+    background-color: var(--primary-background-color);
+    border-radius: 32px;
+}
+
+nav, .book-detail-container {
+    width: 256px;
+    padding: 16px;
+
+    flex: none;
+
+    background-color: var(--menu-background-color);
+    border-radius: 16px;
+    border: var(--primary-line);
+
+    & .icon {
+        width: 32px;
+    }
+
+    & .title {
+        font-size: 1.2rem;
+        font-weight: var(--bold-font-weight);
+    }
+
+    & .sub-title {
+        padding-bottom: 8px;
+
+        color: var(--secondary-font-color);
+        font-family: var(--primary-num-font-family);
+        font-size: 0.8rem;
+        font-weight: 400;
+
+        border-bottom: var(--primary-line);
+    }
+}
+
+nav {
+    & .menu {
+        margin-top: 8px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    & .item {
+        padding: 8px;
+
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        border-radius: 8px;
+        
+        &:hover {
+            cursor: pointer;
+            background-color: var(--secondary-background-color);
+        }
+
+        &:hover .item-icon{
+            background-color: var(--menu-background-color);
+        }
+    
+    }
+
+    & .item-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: var(--secondary-background-color);
+
+        text-align: center;
+    }
+
+    & .item-english-name {
+        margin-top: 2px;
+        color: var(--secondary-font-color);
+        font-size: 0.5rem;
+        font-family: 'Inter', sans-serif;
+    }
+
+    & .item-selected {
+        background-color: var(--secondary-background-color);
+
+        & .item-icon {
+            background-color: var(--menu-background-color);
+        }
+    }
+}
+
+.book-detail-container {
+    display: none;
+    font-size: 0.9rem;
+
+    & .book-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        
+        & .book-image {
+            width: 75%;
+            
+            border-radius: 8px;
+        }
+    }
+
+    & .title-container {
+        margin-bottom: 16px;
+    }
+
+    & .details {
+        display: flex;
+        gap: 16px;
+        font-size: 0.9rem;
+        
+        & .detail-jp, .detail-tw {
+            width: 50%;
+            flex-grow: 1;
+        }
+    }
+
+    & .lable{
+        margin-top: 8px;
+        color: var(--secondary-font-color);
+        font-size: 0.75rem;
+    }
+}
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    align-items: center;
+}
+
+.tool-bar {
+    padding: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    border-radius: 16px;
+    border: var(--primary-line);
+    background-color: var(--menu-background-color);
+
+    & .search-bar-form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    & .tool-icon{
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    & .search-bar-input {
+        border-radius: 0;
+        border: none;
+        background: none;
+        outline: none;
+
+        color: var(--secondary-font-color);
+        font-size: 0.8rem;
+    }
+
+    & .search-bar-button {
+        padding: 8px;
+        width: 54px;
+
+        border-radius: 12px;
+        border: none;
+        background-color: var(--secondary-background-color);
+        font-size: 0.8rem;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(211, 211, 211);
+        }
+    }
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    & * {
+        font-size: 0.8rem;
+    }
+}
+
+.default-sort-item {
+    padding-left: 12px;
+    padding-right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 12px;
+    border: none;
+
+    & .sort-name {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--secondary-background-color);
+    }
+
+    &:hover+.sort-list{
+        display: flex;
+        flex-direction: column;
+    }  
+}
+
+.sort-list {
+    padding: 4px;
+    position: fixed;
+    display: none;
+
+    background-color: var(--menu-background-color);
+
+    border-radius: 0 0 12px 12px;
+
+    &:hover {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & li {
+        padding: 8px 30px 8px 8px;
+        display: flex;
+        flex-direction: column;
+
+        list-style: none;
+
+        &:hover {
+            border-radius: 8px;
+            background-color: var(--secondary-background-color);
+        }
+    }
+}
+
+.contents {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.book-card {
+    padding: 16px;
+    width: 30%;
+    display: flex;
+    gap: 16px;
+
+    border-radius: 16px;
+    border: var(--primary-line);
+
+    background-color: var(--menu-background-color);
+
+    flex-grow: 1;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    & .book-image-container {
+        max-width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        object-fit: cover;
+        object-position: center center;
+
+        border-radius: 8px;
+    }
+
+    & .book-image {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    & .book-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        font-size: 0.75rem;
+
+        & .publishing-info-container {
+            margin-top: 16px;
+            display: flex;
+            gap: 8px;
+
+            & .publishing-info {
+                width: 50%;
+            }
+        }
+
+        & .publishing-info{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    }
+}
+
+.published-date, .isbn {
+    font-family: var(--primary-num-font-family);
+    letter-spacing: 0.5px;
+}
+
+.title-tw {
+    font-weight: var(--bold-font-weight);
+}
+
+.title-jp {
+    color: var(--secondary-font-color);
+    font-family: var(--primary-jp-font-family);
+}
