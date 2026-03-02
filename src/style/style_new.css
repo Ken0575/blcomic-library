@@ -26,7 +26,7 @@
     margin: 0;
     padding: 0;
 
-    color: var(--primary-font-colo);
+    color: var(--primary-font-color);
     font-family: var(--primary-tw-font-family);
     font-weight: var(--primary-font-weight);
 }
