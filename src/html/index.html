@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     <link rel="stylesheet" href="/src/style/style.css">
     <title>臺灣BL漫畫資料庫</title>
 </head>
@@ -20,9 +21,8 @@
     </nav>
     <div class="page-wrap">
         <section class="menu">
-            <div id="allBook" class="item-default item-filter">
+            <div id="allBook" class="item-selected item-filter">
                 <div class="pointer"></div>
-<!--                <div class="item-icon"></div>-->
                 <div class="item-name">
                     <div class="item-name">所有書籍</div>
                     <div class="item-english-name">ALL BOOKS</div>
@@ -63,28 +63,81 @@
                     <div class="item-english-name">TONG LI PUBLISHINIGS</div>
                 </div>
             </div>
-            <div class="categories font-jp">
-                日本出版社
-            </div>
-            <div id="kadokawa" class="item-default item-filter font-jp">
+            <div id="everGlory" class="item-default item-filter">
                 <div class="pointer"></div>
 <!--                <div class="item-icon"></div>-->
                 <div class="item-name">
-                    <div class="item-name">KADOKAWA</div>
-                    <div class="item-english-name">KADOKAWA</div>
+                    <div class="item-name">長鴻出版社</div>
+                    <div class="item-english-name">EVER GLORY PUBLISHINIGS</div>
                 </div>
             </div>
-            <div id="ichijinsha" class="item-default item-filter font-jp">
+            <div id="toHan" class="item-default item-filter">
                 <div class="pointer"></div>
 <!--                <div class="item-icon"></div>-->
                 <div class="item-name">
-                    <div class="item-name">一迅社</div>
-                    <div class="item-english-name">ICHIJINSHA</div>
+                    <div class="item-name">台灣東販</div>
+                    <div class="item-english-name">TAIWAN TOHAN</div>
                 </div>
             </div>
+<!--            <div class="categories font-jp">-->
+<!--                日本出版社-->
+<!--            </div>-->
+<!--            <div id="kadokawa" class="item-default item-filter font-jp">-->
+<!--                <div class="pointer"></div>-->
+<!--&lt;!&ndash;                <div class="item-icon"></div>&ndash;&gt;-->
+<!--                <div class="item-name">-->
+<!--                    <div class="item-name">KADOKAWA</div>-->
+<!--                    <div class="item-english-name">KADOKAWA</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="ichijinsha" class="item-default item-filter font-jp">-->
+<!--                <div class="pointer"></div>-->
+<!--&lt;!&ndash;                <div class="item-icon"></div>&ndash;&gt;-->
+<!--                <div class="item-name">-->
+<!--                    <div class="item-name">一迅社</div>-->
+<!--                    <div class="item-english-name">ICHIJINSHA</div>-->
+<!--                </div>-->
+<!--            </div>-->
         </section>
-        <dav class="vertical-line"></dav>
-        <section id="contents" class="contents">
+        <section class="section-contents">
+            <div class="search-filter-sort">
+                <div class="search-bar">
+                    <form class="search-bar-form" action="" method="post" >
+                        <span class="material-symbols-outlined search-bar-icon">search</span>
+                        <input
+                                type="text"
+                                id="searchInput"
+                                class="search-bar-input"
+                                placeholder="請輸入欲搜尋書名"
+                        >
+                        <button type="button" class="search-bar-button" onclick="searchBook()">搜尋</button>
+                    </form>
+                </div>
+
+                <div class="sort">
+                    <div class="sort-item-container">
+                        <div id="defaultSortItem" class="sort-item">
+                            <img src="/src/imgs/calendar.svg" alt="" class="sort-icon">
+                            臺灣出版日期</div>
+                        <ul class="sort-item-ul">
+                            <li id="sortByPublishedDate_tw"><img src="/src/imgs/calendar.svg" alt="" class="sort-icon">臺灣出版日期</li>
+                            <li id="sortByPublishedDate_jp"><img src="/src/imgs/calendar.svg" alt="" class="sort-icon">日本出版日期</li>
+                        </ul>
+                    </div>
+                    <div class="vertical-line"></div>
+                    <div class="sort-method-container">
+                        <div id="defaultSortMethod" class="sort-method">
+                            <img src="/src/imgs/sort_desc.svg" alt="" class="sort-icon">
+                            降序</div>
+                        <ul class="sort-method-ul">
+                            <li id="sortByDesc"><img src="/src/imgs/sort_desc.svg" alt="" class="sort-icon">降序</li>
+                            <li id="sortByAsc"><img src="/src/imgs/sort_asc.svg" alt="" class="sort-icon">升序</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="contents" class="contents">
+            </div>
         </section>    
     </div>
 </body>
